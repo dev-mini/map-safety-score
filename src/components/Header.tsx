@@ -79,7 +79,7 @@ const Header = () => {
         <div className="flex gap-2 items-center ml-auto">
           <Button
             size={'sm'}
-            className="bg-foreground text-background hover:text-foreground"
+            className="bg-foreground text-background hover:text-foreground rounded-lg"
             onClick={signUp}
             disabled={isLoading}
           >
@@ -87,7 +87,7 @@ const Header = () => {
           </Button>
           <Button
             size={'sm'}
-            className="bg-foreground text-background hover:text-foreground"
+            className="bg-foreground text-background hover:text-foreground rounded-lg"
             onClick={() => login()}
             disabled={isLoading}
           >
