@@ -16,12 +16,12 @@ const MainLayout = () => {
   if (isLoading) return <LoadingScreen />;
 
   return (
-    <div className="flex flex-col w-full h-dvh bg-background text-foreground">
+    <main className="flex flex-col w-full h-dvh text-foreground">
       <Header />
-      <div className="p-4">
+      <div className="p-4 2xl:self-center h-full w-full 2xl:max-w-7xl">
         <Outlet />
       </div>
-    </div>
+    </main>
   );
 };
 
