@@ -13,9 +13,10 @@ const MainLayout = () => {
       toast.error(error?.message ?? 'Ocurrió un error al iniciar sesión');
   }, [error]);
 
+  if (isLoading) return <LoadingScreen />;
+
   return (
     <div className="flex flex-col w-full h-dvh bg-background text-foreground">
-      {isLoading && <LoadingScreen />}
       <Header />
       <div className="p-4">
         <Outlet />
