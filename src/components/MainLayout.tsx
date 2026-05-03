@@ -18,7 +18,7 @@ const MainLayout = () => {
   return (
     <main className="flex flex-col w-full h-dvh text-foreground">
       <Header />
-      <div className="p-4 2xl:self-center h-full w-full 2xl:max-w-7xl">
+      <div className="p-4 2xl:self-center h-full w-full 2xl:max-w-500">
         <Outlet />
       </div>
     </main>
