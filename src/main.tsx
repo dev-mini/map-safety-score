@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { Toaster } from '@/components/ui/sonner';
 
 const DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN;
 const CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -15,6 +16,15 @@ createRoot(document.getElementById('root')!).render(
       clientId={CLIENT_ID}
       authorizationParams={{ redirect_uri: SUCCESS_URL }}
     >
+      <Toaster
+        className="bg-white"
+        position="top-center"
+        toastOptions={{
+          classNames: {
+            toast: 'bg-secondary! w-sm! text-xs!',
+          },
+        }}
+      />
       <App />
     </Auth0Provider>
   </StrictMode>
