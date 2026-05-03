@@ -3,7 +3,7 @@ import { MapPinned, ShieldAlert, Speech } from 'lucide-react';
 
 const Home = () => {
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full md:h-full">
       <Hero />
       <section className="flex flex-col md:flex-row my-8 md:mt-20 gap-8">
         <article className="flex flex-col md:flex-1/3 gap-2 px-4 rounded-lg py-4 bg-card w-full">
