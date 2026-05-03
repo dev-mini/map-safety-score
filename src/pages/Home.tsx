@@ -7,7 +7,7 @@ const Home = () => {
       <img
         src="/src/assets/images/bg-map.png"
         alt="Map background"
-        className="flex absolute top-0 left-0 w-full h-84 object-right object-cover rounded-xl md:object-top brightness-50 md:brightness-90 drop-shadow-xs drop-shadow-primary/80 -z-10 mask-[linear-gradient(to_bottom,black,transparent)]"
+        className="flex absolute top-0 left-0 w-full h-84 object-right object-cover rounded-xl md:object-top brightness-50 md:brightness-90 -z-10 mask-[linear-gradient(to_bottom,black,transparent)]"
       />
       <Hero />
       <section className="flex flex-col md:flex-row mt-28 gap-8">
