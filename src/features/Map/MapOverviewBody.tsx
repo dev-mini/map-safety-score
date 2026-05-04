@@ -7,7 +7,6 @@ import {
   // MarkerContent,
   // MarkerTooltip,
 } from '@/components/ui/map';
-import { Card } from '@/components/ui/card';
 import MapEventListener from '@/components/custom-map/MapEventListener';
 // import { useState } from 'react';
 
@@ -38,10 +37,13 @@ const MapOverviewBody = () => {
   // } | null>(null);
 
   return (
-    <Card className="h-300 p-0 overflow-hidden mb-4">
-      <Map center={[-74.006, 40.7128]} zoom={11}>
-        <MapControls position="top-right" showZoom showLocate />
-        {/* <MapClusterLayer<EarthquakeProperties>
+    <Map
+      center={[-101.19351477972177, 19.70235165290019]}
+      zoom={4}
+      className="h-300 p-0 overflow-hidden mb-4"
+    >
+      <MapControls position="top-right" showZoom showLocate />
+      {/* <MapClusterLayer<EarthquakeProperties>
             data="https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson"
             clusterRadius={50}
             clusterMaxZoom={14}
@@ -71,9 +73,8 @@ const MapOverviewBody = () => {
               <MarkerTooltip>{stop.name}</MarkerTooltip>
             </MapMarker>
           ))} */}
-        <MapEventListener />
-      </Map>
-    </Card>
+      <MapEventListener />
+    </Map>
   );
 };
 
