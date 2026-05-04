@@ -1,8 +1,15 @@
+import { MapOverviewContextProvider } from '@/context/MapOverviewContext';
+import MapOverviewHeader from '@/features/Map/MapOverviewHeader';
+import MapOverviewBody from '@/features/Map/MapOverviewBody';
+
 const MapOverview = () => {
   return (
-    <div>
-      <h1>Map Overview</h1>
-    </div>
+    <MapOverviewContextProvider>
+      <div className="flex flex-col h-full">
+        <MapOverviewHeader />
+        <MapOverviewBody />
+      </div>
+    </MapOverviewContextProvider>
   );
 };
 
