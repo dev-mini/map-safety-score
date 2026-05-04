@@ -38,7 +38,7 @@ const MapOverviewBody = () => {
   // } | null>(null);
 
   return (
-    <Card className="h-[calc(100dvh-89px)] p-0 overflow-hidden mb-4">
+    <Card className="h-300 p-0 overflow-hidden mb-4">
       <Map center={[-74.006, 40.7128]} zoom={11}>
         <MapControls position="top-right" showZoom showLocate />
         {/* <MapClusterLayer<EarthquakeProperties>
