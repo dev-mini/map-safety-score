@@ -239,9 +239,10 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
       apiKey: API_KEY,
       limit: 6,
       placeholder: 'Search location...',
+      debounceSearch: 300,
     });
 
-    map.addControl(gc);
+    map.addControl(gc, 'top-left');
 
     const styleDataHandler = () => {
       clearStyleTimeout();
