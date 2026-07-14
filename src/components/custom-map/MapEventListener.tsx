@@ -12,7 +12,8 @@ import {
 const MapEventListener = () => {
   const { map, isLoaded } = useMap();
   const { isAuthenticated } = useAuth0();
-  const { mode } = useMapOverviewContext();
+  const { mode, handleChangeFormVisible, handleChangePoint } =
+    useMapOverviewContext();
 
   useEffect(() => {
     if (!map || !isLoaded) return;
@@ -31,18 +32,8 @@ const MapEventListener = () => {
         return handleOffClick;
       }
 
-      //DETERMINE SELECTED POINT NAME
-      const features = map.queryRenderedFeatures(e.point);
-      if (features.length > 0) {
-        const clickedFeature = features[0];
-        // Access the name property (assuming 'name' exists in your data)
-        console.log(
-          'Clicked feature name:',
-          clickedFeature.properties.name ?? clickedFeature.properties.class
-        );
-      }
-      console.log(e);
-      console.log('Clicked at:', e.lngLat);
+      handleChangePoint({ lng: e.lngLat.lng, lat: e.lngLat.lat });
+      handleChangeFormVisible(true);
     };
 
     map.on('click', handleClick);
