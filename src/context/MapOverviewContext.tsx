@@ -1,5 +1,6 @@
 import type {
   iMapOverviewContextProviderProps,
+  iPoint,
   MapMode,
 } from '@/types/MapOverviewContextTypes';
 import { MapOverviewContext } from './MapOverViewCreateContext';
@@ -10,6 +11,7 @@ export const MapOverviewContextProvider = ({
 }: iMapOverviewContextProviderProps) => {
   const [mode, setMode] = useState<MapMode>('report');
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [point, setPoint] = useState<iPoint | null>(null);
 
   const handleChangeMode = (value: MapMode) => {
     setMode(value);
@@ -19,6 +21,10 @@ export const MapOverviewContextProvider = ({
     setIsFormVisible(value);
   };
 
+  const handleChangePoint = (value: iPoint | null) => {
+    setPoint(value);
+  };
+
   return (
     <MapOverviewContext
       value={{
@@ -26,6 +32,8 @@ export const MapOverviewContextProvider = ({
         isFormVisible,
         handleChangeMode,
         handleChangeFormVisible,
+        handleChangePoint,
+        point,
       }}
     >
       {children}
