@@ -6,6 +6,8 @@ const initialValues: iMapOverviewContext = {
   isFormVisible: false,
   handleChangeMode: () => {},
   handleChangeFormVisible: () => {},
+  handleChangePoint: () => {},
+  point: null,
 };
 
 export const MapOverviewContext =
