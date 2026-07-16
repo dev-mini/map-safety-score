@@ -1,17 +1,17 @@
 import type {
   iMapOverviewContextProviderProps,
-  iPoint,
   MapMode,
 } from '@/types/MapOverviewContextTypes';
 import { MapOverviewContext } from './MapOverViewCreateContext';
 import { useState } from 'react';
+import type { Coordinates } from '@/types/MapOverviewTypes';
 
 export const MapOverviewContextProvider = ({
   children,
 }: iMapOverviewContextProviderProps) => {
   const [mode, setMode] = useState<MapMode>('report');
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [point, setPoint] = useState<iPoint | null>(null);
+  const [point, setPoint] = useState<Coordinates | null>(null);
 
   const handleChangeMode = (value: MapMode) => {
     setMode(value);
@@ -21,7 +21,7 @@ export const MapOverviewContextProvider = ({
     setIsFormVisible(value);
   };
 
-  const handleChangePoint = (value: iPoint | null) => {
+  const handleChangePoint = (value: Coordinates | null) => {
     setPoint(value);
   };
 
