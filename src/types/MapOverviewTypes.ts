@@ -9,3 +9,7 @@ export interface IncidentReportFormData {
   incidentType: string;
   coordinates: Coordinates | null;
 }
+
+export interface iMapOverviewFilters {
+  incidentType: string;
+}
