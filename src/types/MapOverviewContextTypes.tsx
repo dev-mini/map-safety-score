@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { Coordinates } from './MapOverviewTypes';
+import type { Coordinates, iMapOverviewFilters } from './MapOverviewTypes';
 
 export type MapMode = 'route' | 'report';
 
@@ -10,6 +10,9 @@ export interface iMapOverviewContext {
   handleChangeFormVisible: (value: boolean) => void;
   handleChangePoint: (value: Coordinates | null) => void;
   point: Coordinates | null;
+  filters: iMapOverviewFilters;
+  handleChangeFilters: (value: string, name: string) => void;
+  handleClearFilters: () => void;
 }
 
 export interface iMapOverviewContextProviderProps {
