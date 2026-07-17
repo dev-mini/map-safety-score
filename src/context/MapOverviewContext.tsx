@@ -4,7 +4,14 @@ import type {
 } from '@/types/MapOverviewContextTypes';
 import { MapOverviewContext } from './MapOverViewCreateContext';
 import { useState } from 'react';
-import type { Coordinates } from '@/types/MapOverviewTypes';
+import type {
+  Coordinates,
+  iMapOverviewFilters,
+} from '@/types/MapOverviewTypes';
+
+const INITIAL_FILTERS: iMapOverviewFilters = {
+  incidentType: '',
+};
 
 export const MapOverviewContextProvider = ({
   children,
@@ -12,6 +19,7 @@ export const MapOverviewContextProvider = ({
   const [mode, setMode] = useState<MapMode>('report');
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [point, setPoint] = useState<Coordinates | null>(null);
+  const [filters, setFilters] = useState<iMapOverviewFilters>(INITIAL_FILTERS);
 
   const handleChangeMode = (value: MapMode) => {
     setMode(value);
@@ -26,6 +34,17 @@ export const MapOverviewContextProvider = ({
     setPoint(value);
   };
 
+  const handleChangeFilters = (value: string, name: string) => {
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+  };
+
+  const handleClearFilters = () => {
+    setFilters(INITIAL_FILTERS);
+  };
+
   return (
     <MapOverviewContext
       value={{
@@ -35,6 +54,9 @@ export const MapOverviewContextProvider = ({
         handleChangeFormVisible,
         handleChangePoint,
         point,
+        filters,
+        handleChangeFilters,
+        handleClearFilters,
       }}
     >
       {children}
