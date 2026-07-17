@@ -18,6 +18,7 @@ export const MapOverviewContextProvider = ({
   };
 
   const handleChangeFormVisible = (value: boolean) => {
+    if (value === false) handleChangePoint(null);
     setIsFormVisible(value);
   };
 
