@@ -32,7 +32,7 @@ const MapEventListener = () => {
         return handleOffClick;
       }
 
-      handleChangePoint({ latitude: e.lngLat.lat, longitude: e.lngLat.lng });
+      handleChangePoint({ longitude: e.lngLat.lng, latitude: e.lngLat.lat });
       handleChangeFormVisible(true);
     };
 

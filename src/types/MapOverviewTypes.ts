@@ -1,6 +1,6 @@
 export interface Coordinates {
-  latitude: number;
   longitude: number;
+  latitude: number;
 }
 
 export interface IncidentReportFormData {
