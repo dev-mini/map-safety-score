@@ -8,15 +8,18 @@ import {
   CLICK_MAP_REPORT_WITHOUT_AUTH,
   CLICK_MAP_ROUTE_WITHOUT_AUTH,
 } from '@/constants';
+import type { iMapListenerProps } from '@/types/MapOverviewTypes';
 
-const MapEventListener = () => {
+const MapEventListener = ({
+  isCurrentPointClicked = false,
+}: iMapListenerProps) => {
   const { map, isLoaded } = useMap();
   const { isAuthenticated } = useAuth0();
   const { mode, handleChangeFormVisible, handleChangePoint } =
     useMapOverviewContext();
 
   useEffect(() => {
-    if (!map || !isLoaded) return;
+    if (!map || !isLoaded || isCurrentPointClicked) return;
 
     const handleOffClick = () => {
       map.off('click', handleClick);
@@ -39,7 +42,7 @@ const MapEventListener = () => {
     map.on('click', handleClick);
 
     return handleOffClick;
-  }, [map, isLoaded]);
+  }, [map, isLoaded, isCurrentPointClicked]);
 
   return null;
 };

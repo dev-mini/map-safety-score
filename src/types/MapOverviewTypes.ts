@@ -13,3 +13,7 @@ export interface IncidentReportFormData {
 export interface iMapOverviewFilters {
   incidentType: string;
 }
+
+export interface iMapListenerProps {
+  isCurrentPointClicked: boolean;
+}
