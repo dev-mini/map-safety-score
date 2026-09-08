@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Coordinates, iMapOverviewFilters } from './MapOverviewTypes';
 import type { Category } from '@/api/categories/categoryTypes';
-import type { Incident } from '@/api/incidents/incidentTypes';
-
+import type { incidentRes } from '@/api/incidents/incidentTypes';
 export type MapMode = 'route' | 'report';
 
 export interface iMapOverviewContext {
@@ -16,7 +15,7 @@ export interface iMapOverviewContext {
   handleChangeFilters: (value: string, name: string) => void;
   handleClearFilters: () => void;
   categories: Category[];
-  incidents: Incident[];
+  incidentsRes: incidentRes;
 }
 
 export interface iMapOverviewContextProviderProps {
