@@ -61,8 +61,8 @@ const MapPointForm = () => {
             Provide details about the incident location.
           </DrawerDescription>
           <DrawerDescription>
-            Coordinates: {coordinates?.lat.toFixed(4)},
-            {coordinates?.lng.toFixed(4)}
+            Coordinates: {coordinates?.latitude.toFixed(4)},
+            {coordinates?.longitude.toFixed(4)}
           </DrawerDescription>
         </DrawerHeader>
         <div className="no-scrollbar overflow-y-auto px-4">
