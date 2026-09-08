@@ -8,7 +8,7 @@ export interface iIncidentReqData {
 }
 
 export type incidentRes<
-  P extends GeoJSON.GeoJsonProperties = GeoJSON.GeoJsonProperties,
+  P extends GeoJSON.GeoJsonProperties = GeoJSON.GeoJsonProperties & Incident,
 > = string | GeoJSON.FeatureCollection<GeoJSON.Point, P>;
 
 interface IncidentGeometry {
@@ -29,6 +29,6 @@ export interface Incident {
   categoryId?: number;
   description: string;
   location: Coordinates;
-  create_at: Date;
+  createdAt: string | Date;
   category?: Category;
 }
