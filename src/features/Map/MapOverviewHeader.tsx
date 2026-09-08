@@ -10,8 +10,8 @@ import {
 } from '@/components/ui/select';
 import { useMapOverviewContext } from '@/context/useMapOverviewContext';
 
-const MapOverviewHeader = () => {
-  const { filters, handleChangeFilters, handleClearFilters } =
+export const MapOverviewHeader = () => {
+  const { filters, handleChangeFilters, handleClearFilters, categories } =
     useMapOverviewContext();
 
   const isClearFiltersVisible = !!filters.incidentType;
@@ -26,15 +26,18 @@ const MapOverviewHeader = () => {
             name="incidentType"
             value={filters.incidentType}
             onValueChange={value => handleChangeFilters(value, 'incidentType')}
+            disabled={!categories?.length}
           >
             <SelectTrigger className="">
               <SelectValue placeholder="Select incident type" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="1">Security</SelectItem>
-                <SelectItem value="2">Building</SelectItem>
-                <SelectItem value="3">Others</SelectItem>
+                {categories.map(({ id, name }) => (
+                  <SelectItem key={id} value={id.toString()}>
+                    {name}
+                  </SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
