@@ -7,7 +7,11 @@ const initialValues: iMapOverviewContext = {
   handleChangeMode: () => {},
   handleChangeFormVisible: () => {},
   handleChangePoint: () => {},
+  filters: { incidentType: '' },
+  handleChangeFilters: () => {},
+  handleClearFilters: () => {},
   point: null,
+  categories: [],
 };
 
 export const MapOverviewContext =

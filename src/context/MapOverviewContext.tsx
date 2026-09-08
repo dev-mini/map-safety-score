@@ -3,11 +3,14 @@ import type {
   MapMode,
 } from '@/types/MapOverviewContextTypes';
 import { MapOverviewContext } from './MapOverViewCreateContext';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import type {
   Coordinates,
   iMapOverviewFilters,
 } from '@/types/MapOverviewTypes';
+import { apiClient } from '@/api/apiClient';
+import type { iCategoryReqData } from '@/api/categories/categoryTypes';
+import { getCategories } from '@/api/categories/categories';
 
 const INITIAL_FILTERS: iMapOverviewFilters = {
   incidentType: '',
@@ -20,6 +23,9 @@ export const MapOverviewContextProvider = ({
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [point, setPoint] = useState<Coordinates | null>(null);
   const [filters, setFilters] = useState<iMapOverviewFilters>(INITIAL_FILTERS);
+  const { categories } = use<iCategoryReqData>(
+    apiClient('/categories', getCategories)
+  );
 
   const handleChangeMode = (value: MapMode) => {
     setMode(value);
@@ -57,6 +63,7 @@ export const MapOverviewContextProvider = ({
         filters,
         handleChangeFilters,
         handleClearFilters,
+        categories,
       }}
     >
       {children}

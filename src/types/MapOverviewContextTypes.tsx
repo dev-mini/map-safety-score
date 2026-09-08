@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Coordinates, iMapOverviewFilters } from './MapOverviewTypes';
+import type { Category } from '@/api/categories/categoryTypes';
 
 export type MapMode = 'route' | 'report';
 
@@ -13,6 +14,7 @@ export interface iMapOverviewContext {
   filters: iMapOverviewFilters;
   handleChangeFilters: (value: string, name: string) => void;
   handleClearFilters: () => void;
+  categories: Category[];
 }
 
 export interface iMapOverviewContextProviderProps {
