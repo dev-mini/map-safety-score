@@ -3,14 +3,30 @@ import type { Category } from '../categories/categoryTypes';
 
 export interface iIncidentReqData {
   statusCode: number;
-  incidents: Incident[];
+  type: string;
+  features: IncidentFeatureGeoJSON[];
+}
+
+export type incidentRes<
+  P extends GeoJSON.GeoJsonProperties = GeoJSON.GeoJsonProperties,
+> = string | GeoJSON.FeatureCollection<GeoJSON.Point, P>;
+
+interface IncidentGeometry {
+  type: 'Point';
+  coordinates: [number, number];
+}
+
+export interface IncidentFeatureGeoJSON {
+  type: 'Feature';
+  properties: Incident;
+  geometry: IncidentGeometry;
 }
 
 export interface Incident {
   id: number;
   auth0Id: string;
   auth0User: string;
-  categoryId: number;
+  categoryId?: number;
   description: string;
   location: Coordinates;
   create_at: Date;
