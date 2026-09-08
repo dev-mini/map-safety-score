@@ -3,7 +3,7 @@ import Header from './Header';
 import LoadingScreen from './LoadingScreen';
 import { useAuth0 } from '@auth0/auth0-react';
 import { toast } from 'sonner';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 
 const MainLayout = () => {
   const { isLoading, error } = useAuth0();
@@ -19,7 +19,9 @@ const MainLayout = () => {
     <main className="flex flex-col w-full h-dvh text-foreground">
       <Header />
       <div className="p-4 2xl:self-center h-full w-full 2xl:max-w-500">
-        <Outlet />
+        <Suspense fallback={<LoadingScreen />}>
+          <Outlet />
+        </Suspense>
       </div>
     </main>
   );
