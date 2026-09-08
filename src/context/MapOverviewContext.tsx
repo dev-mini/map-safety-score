@@ -11,6 +11,8 @@ import type {
 import { apiClient } from '@/api/apiClient';
 import type { iCategoryReqData } from '@/api/categories/categoryTypes';
 import { getCategories } from '@/api/categories/categories';
+import type { iIncidentReqData } from '@/api/incidents/incidentTypes';
+import { getIncidents } from '@/api/incidents/incidents';
 
 const INITIAL_FILTERS: iMapOverviewFilters = {
   incidentType: '',
@@ -25,6 +27,9 @@ export const MapOverviewContextProvider = ({
   const [filters, setFilters] = useState<iMapOverviewFilters>(INITIAL_FILTERS);
   const { categories } = use<iCategoryReqData>(
     apiClient('/categories', getCategories)
+  );
+  const { incidents } = use<iIncidentReqData>(
+    apiClient('/incidents', getIncidents)
   );
 
   const handleChangeMode = (value: MapMode) => {
@@ -64,6 +69,7 @@ export const MapOverviewContextProvider = ({
         handleChangeFilters,
         handleClearFilters,
         categories,
+        incidents,
       }}
     >
       {children}

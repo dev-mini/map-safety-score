@@ -12,6 +12,7 @@ const initialValues: iMapOverviewContext = {
   handleClearFilters: () => {},
   point: null,
   categories: [],
+  incidents: [],
 };
 
 export const MapOverviewContext =
