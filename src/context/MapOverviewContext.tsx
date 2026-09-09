@@ -3,7 +3,7 @@ import type {
   MapMode,
 } from '@/types/MapOverviewContextTypes';
 import { MapOverviewContext } from './MapOverViewCreateContext';
-import { use, useState } from 'react';
+import { use, useState, useSyncExternalStore } from 'react';
 import type {
   Coordinates,
   iMapOverviewFilters,
@@ -25,10 +25,13 @@ export const MapOverviewContextProvider = ({
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [point, setPoint] = useState<Coordinates | null>(null);
   const [filters, setFilters] = useState<iMapOverviewFilters>(INITIAL_FILTERS);
-  const { categories } = use<iCategoryReqData>(
-    apiClient('/categories', getCategories)
+  const { categories } = use<iCategoryReqData>(apiClient.get('/categories'));
+
+  const promise = useSyncExternalStore(
+    cb => apiClient.subscribe('/incidents', cb),
+    () => apiClient.get<incidentRes>('/incidents')
   );
-  const incidentsRes = use<incidentRes>(apiClient('/incidents', getIncidents));
+  const incidentsRes = use<incidentRes>(promise);
 
   const handleChangeMode = (value: MapMode) => {
     setMode(value);
