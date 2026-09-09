@@ -10,9 +10,7 @@ import type {
 } from '@/types/MapOverviewTypes';
 import { apiClient } from '@/api/apiClient';
 import type { iCategoryReqData } from '@/api/categories/categoryTypes';
-import { getCategories } from '@/api/categories/categories';
 import type { incidentRes } from '@/api/incidents/incidentTypes';
-import { getIncidents } from '@/api/incidents/incidents';
 
 const INITIAL_FILTERS: iMapOverviewFilters = {
   incidentType: '',
