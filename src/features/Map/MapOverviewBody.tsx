@@ -9,12 +9,13 @@ import MapPointForm from './MapPointForm';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useMapOverviewContext } from '@/context/useMapOverviewContext';
 import type { Incident } from '@/api/incidents/incidentTypes';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const MapOverviewBody = () => {
   const { isAuthenticated } = useAuth0();
   const { isFormVisible, incidentsRes } = useMapOverviewContext();
   const [selectedPoint, setSelectedPoint] = useState<Incident | null>(null);
+  const pointClickedRef = useRef(false);
 
   return (
     <Map
@@ -27,6 +28,7 @@ const MapOverviewBody = () => {
         clusterRadius={50}
         clusterMaxZoom={14}
         onPointClick={(feature, coordinates) => {
+          pointClickedRef.current = true;
           setSelectedPoint({
             ...feature?.properties,
             location: {
@@ -45,7 +47,7 @@ const MapOverviewBody = () => {
           closeOnClick={false}
           focusAfterOpen={false}
           closeButton
-          className="w-34"
+          className="w-64"
         >
           <div className="text-[13px]">
             <p className="text-muted-foreground">
@@ -65,7 +67,7 @@ const MapOverviewBody = () => {
       )}
 
       <MapControls position="top-right" showZoom showLocate />
-      <MapEventListener isCurrentPointClicked={!!selectedPoint} />
+      <MapEventListener pointClickedRef={pointClickedRef} />
       {isAuthenticated && isFormVisible && <MapPointForm />}
     </Map>
   );

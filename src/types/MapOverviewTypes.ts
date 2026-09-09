@@ -1,3 +1,5 @@
+import type { RefObject } from 'react';
+
 export interface Coordinates {
   longitude: number;
   latitude: number;
@@ -15,5 +17,5 @@ export interface iMapOverviewFilters {
 }
 
 export interface iMapListenerProps {
-  isCurrentPointClicked: boolean;
+  pointClickedRef: RefObject<boolean>;
 }
