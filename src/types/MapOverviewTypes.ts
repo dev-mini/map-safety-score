@@ -4,7 +4,7 @@ export interface Coordinates {
 }
 
 export interface IncidentReportFormData {
-  email: string;
+  user: string;
   description: string;
   incidentType: string;
   coordinates: Coordinates | null;

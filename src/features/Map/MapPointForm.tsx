@@ -35,12 +35,14 @@ import { useMapForm } from './useMapForm';
 import { X } from 'lucide-react';
 
 const MapPointForm = () => {
-  const { isFormVisible, handleChangeFormVisible } = useMapOverviewContext();
+  const { isFormVisible, handleChangeFormVisible, categories } =
+    useMapOverviewContext();
   const {
-    incidentReportValues: { email, description, incidentType, coordinates },
+    incidentReportValues: { user, description, incidentType, coordinates },
     handleChangeDescription,
     handleChangeIncidentType,
     charCount,
+    isSubmitButtonDisabled,
   } = useMapForm();
 
   return (
@@ -70,25 +72,25 @@ const MapPointForm = () => {
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="username">Email</FieldLabel>
-                <Input id="username" type="text" value={email} disabled />
+                <Input id="username" type="text" value={user} disabled />
               </Field>
               <Field>
                 <FieldLabel htmlFor="incident-type">Incident Type</FieldLabel>
                 <Select
                   defaultValue={incidentType}
                   onValueChange={handleChangeIncidentType}
+                  disabled={!categories.length}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger defaultValue={''}>
                     <SelectValue placeholder="Select Incident Type" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="0" disabled>
-                        Select Incident Type
-                      </SelectItem>
-                      <SelectItem value={'1'}>Security</SelectItem>
-                      <SelectItem value={'2'}>Building</SelectItem>
-                      <SelectItem value={'3'}>Other</SelectItem>
+                      {categories.map(({ id, name }) => (
+                        <SelectItem key={id} value={id.toString()}>
+                          {name}
+                        </SelectItem>
+                      ))}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -118,7 +120,7 @@ const MapPointForm = () => {
           </FieldSet>
         </div>
         <DrawerFooter>
-          <Button>Submit</Button>
+          <Button disabled={isSubmitButtonDisabled}>Submit</Button>
           <DrawerClose asChild>
             <Button
               variant="outline"
