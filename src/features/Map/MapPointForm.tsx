@@ -41,8 +41,10 @@ const MapPointForm = () => {
     incidentReportValues: { user, description, incidentType, coordinates },
     handleChangeDescription,
     handleChangeIncidentType,
+    handleSubmit,
     charCount,
     isSubmitButtonDisabled,
+    isLoading,
   } = useMapForm();
 
   return (
@@ -54,6 +56,7 @@ const MapPointForm = () => {
             size="icon"
             aria-label="Close"
             className="absolute top-2 right-2"
+            disabled={isLoading}
             onClick={() => handleChangeFormVisible(false)}
           >
             <X />
@@ -120,10 +123,13 @@ const MapPointForm = () => {
           </FieldSet>
         </div>
         <DrawerFooter>
-          <Button disabled={isSubmitButtonDisabled}>Submit</Button>
+          <Button disabled={isSubmitButtonDisabled} onClick={handleSubmit}>
+            Submit
+          </Button>
           <DrawerClose asChild>
             <Button
               variant="outline"
+              disabled={isLoading}
               onClick={() => handleChangeFormVisible(false)}
             >
               Cancel
