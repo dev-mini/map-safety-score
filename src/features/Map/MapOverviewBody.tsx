@@ -27,6 +27,9 @@ const MapOverviewBody = () => {
         data={incidentsRes}
         clusterRadius={50}
         clusterMaxZoom={14}
+        onClusterClick={() => {
+          pointClickedRef.current = true;
+        }}
         onPointClick={(feature, coordinates) => {
           pointClickedRef.current = true;
           setSelectedPoint({
