@@ -13,7 +13,7 @@ import { useRef, useState } from 'react';
 
 const MapOverviewBody = () => {
   const { isAuthenticated } = useAuth0();
-  const { isFormVisible, incidentsRes } = useMapOverviewContext();
+  const { isFormVisible, incidentsRes, mode } = useMapOverviewContext();
   const [selectedPoint, setSelectedPoint] = useState<Incident | null>(null);
   const pointClickedRef = useRef(false);
 
@@ -70,8 +70,12 @@ const MapOverviewBody = () => {
       )}
 
       <MapControls position="top-right" showZoom showLocate />
-      <MapEventListener pointClickedRef={pointClickedRef} />
-      {isAuthenticated && isFormVisible && <MapPointForm />}
+      {mode === 'report' && (
+        <MapEventListener pointClickedRef={pointClickedRef} />
+      )}
+      {isAuthenticated && isFormVisible && mode === 'report' && (
+        <MapPointForm />
+      )}
     </Map>
   );
 };

@@ -11,10 +11,19 @@ import {
 import { useMapOverviewContext } from '@/context/useMapOverviewContext';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router';
+import { Route, FlagTriangleRight } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import type { MapMode } from '@/types/MapOverviewContextTypes';
 
 export const MapOverviewHeader = () => {
-  const { filters, handleChangeFilters, handleClearFilters, categories } =
-    useMapOverviewContext();
+  const {
+    filters,
+    handleChangeFilters,
+    handleClearFilters,
+    categories,
+    mode,
+    handleChangeMode,
+  } = useMapOverviewContext();
   const navigate = useNavigate();
 
   const isClearFiltersVisible = !!filters.incidentType;
@@ -56,6 +65,21 @@ export const MapOverviewHeader = () => {
           </Button>
         )}
       </div>
+      <Tabs
+        defaultValue={mode}
+        onValueChange={value => handleChangeMode(value as MapMode)}
+      >
+        <TabsList variant="line">
+          <TabsTrigger value="report">
+            <FlagTriangleRight />
+            Report
+          </TabsTrigger>
+          <TabsTrigger value="route">
+            <Route />
+            Route
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
     </div>
   );
 };
