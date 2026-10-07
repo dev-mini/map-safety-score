@@ -9,16 +9,24 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useMapOverviewContext } from '@/context/useMapOverviewContext';
+import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 export const MapOverviewHeader = () => {
   const { filters, handleChangeFilters, handleClearFilters, categories } =
     useMapOverviewContext();
+  const navigate = useNavigate();
 
   const isClearFiltersVisible = !!filters.incidentType;
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="font-bold text-3xl mb-6">Map incident overview</h1>
+      <div className="flex items-center gap-4 mb-6">
+        <button onClick={() => navigate('/')}>
+          <ArrowLeft />
+        </button>
+        <h1 className="font-bold text-3xl ">Map incident overview</h1>
+      </div>
       <div className="flex items-end gap-4">
         <Field className="max-w-50 w-full">
           <FieldLabel>Incident Type</FieldLabel>
