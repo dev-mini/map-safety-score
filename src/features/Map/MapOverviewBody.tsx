@@ -4,16 +4,14 @@ import {
   MapControls,
   MapPopup,
 } from '@/components/ui/map';
-import MapEventListener from '@/components/custom-map/MapEventListener';
-import MapPointForm from './MapPointForm';
-import { useAuth0 } from '@auth0/auth0-react';
 import { useMapOverviewContext } from '@/context/useMapOverviewContext';
 import type { Incident } from '@/api/incidents/incidentTypes';
 import { useRef, useState } from 'react';
+import { ReportControls } from '@/components/custom-map/ReportControls';
+import { RouteControls } from '@/components/custom-map/RouteControls';
 
 const MapOverviewBody = () => {
-  const { isAuthenticated } = useAuth0();
-  const { isFormVisible, incidentsRes, mode } = useMapOverviewContext();
+  const { incidentsRes, mode } = useMapOverviewContext();
   const [selectedPoint, setSelectedPoint] = useState<Incident | null>(null);
   const pointClickedRef = useRef(false);
 
@@ -70,12 +68,8 @@ const MapOverviewBody = () => {
       )}
 
       <MapControls position="top-right" showZoom showLocate />
-      {mode === 'report' && (
-        <MapEventListener pointClickedRef={pointClickedRef} />
-      )}
-      {isAuthenticated && isFormVisible && mode === 'report' && (
-        <MapPointForm />
-      )}
+      {mode === 'report' && <ReportControls />}
+      {mode === 'route' && <RouteControls />}
     </Map>
   );
 };
