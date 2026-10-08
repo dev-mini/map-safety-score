@@ -139,3 +139,7 @@
     @apply hidden!;
   }
 }
+
+.maplibregl-control-container .maplibregl-ctrl-top-left > :first-child {
+  z-index: 100 !important;
+}
