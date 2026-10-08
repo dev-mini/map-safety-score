@@ -20,10 +20,6 @@ import { X, Minus, Plus, Locate, Maximize, Loader2 } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
-import { GeocodingControl } from '@maptiler/geocoding-control/maplibregl';
-
-const API_KEY = import.meta.env.VITE_MAPTILER_API_KEY;
-
 const defaultStyles = {
   dark: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
   light: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
@@ -234,15 +230,6 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
       ...props,
       ...viewport,
     });
-
-    const gc = new GeocodingControl({
-      apiKey: API_KEY,
-      limit: 6,
-      placeholder: 'Search location...',
-      debounceSearch: 300,
-    });
-
-    map.addControl(gc, 'top-left');
 
     const styleDataHandler = () => {
       clearStyleTimeout();
