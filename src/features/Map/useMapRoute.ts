@@ -1,8 +1,11 @@
 import { getMapRoute } from '@/api/mapRoute';
+import { MAP_ROUTE_WITHOUT_AUTH } from '@/constants';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 export const useMapRoute = () => {
+  const { isAuthenticated } = useAuth0();
   const [originPoint, setOriginPoint] = useState<[number, number] | null>(null);
   const [destinationPoint, setDestinationPoint] = useState<
     [number, number] | null
@@ -46,6 +49,11 @@ export const useMapRoute = () => {
   useEffect(() => {
     if (!originPoint || !destinationPoint) return;
 
+    if (!isAuthenticated) {
+      toast.error(MAP_ROUTE_WITHOUT_AUTH);
+      return;
+    }
+
     getRoute();
 
     return () => {
@@ -53,7 +61,7 @@ export const useMapRoute = () => {
       setOriginPoint(null);
       setDestinationPoint(null);
     };
-  }, [originPoint, destinationPoint]);
+  }, [originPoint, destinationPoint, isAuthenticated]);
 
   return {
     route,
