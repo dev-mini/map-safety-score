@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
 import { MapRoute, useMap } from '../ui/map';
 import { getGeocodingInstance } from '@/lib/geocodingControl';
+import type { PickEvent } from '@maptiler/geocoding-control/maplibregl';
+import { useMapRoute } from '@/features/Map/useMapRoute';
 
 export const RouteControls = () => {
   const { map, isLoaded } = useMap();
-  const route = [
-    [-74.006, 40.7128], // NYC City Hall
-    [-73.9857, 40.7484], // Empire State Building
-    [-73.9772, 40.7527], // Grand Central
-    [-73.9654, 40.7829], // Central Park
-  ] as [number, number][];
+  const {
+    route,
+    handleChangeOriginPoint,
+    handleChangeDestinationPoint,
+    getRoute,
+  } = useMapRoute();
 
   useEffect(() => {
     if (!map || !isLoaded) return;
@@ -19,6 +21,23 @@ export const RouteControls = () => {
 
     map.addControl(gcOriginControl, 'top-left');
     map.addControl(gcDestinationControl, 'top-left');
+
+    const getCoordinatesFromPick = (e: PickEvent) => {
+      return Array.isArray(e.feature?.geometry?.coordinates[0])
+        ? e.feature?.center
+        : e.feature?.geometry?.coordinates;
+    };
+
+    gcOriginControl.on('pick', e => {
+      const origin = getCoordinatesFromPick(e);
+      handleChangeOriginPoint(origin);
+    });
+
+    gcDestinationControl.on('pick', e => {
+      const destination = getCoordinatesFromPick(e);
+      handleChangeDestinationPoint(destination);
+      getRoute();
+    });
 
     return () => {
       const removeDOMElement = () => {
